@@ -14,7 +14,7 @@
     "wokcommands": "^1.5.3"
   },
   "scripts": {
-    "bot": "pm2 start bot.ts --watch",
+    "bot": "ts-node bot.ts",
     "dev": "pm2 start bot-dev.ts --watch"
   },
   "author": "Alex",
