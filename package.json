@@ -7,6 +7,7 @@
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0",
     "mongoose": "^6.3.0",
+    "pm2": "^5.2.0",
     "pretty-ms": "^7.0.1",
     "wokcommands": "^1.5.3"
   },
