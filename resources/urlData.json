@@ -1,0 +1,48 @@
+[
+    {
+        "key": "shortURL",
+        "data": [
+            "bit.ly",
+            "x.co",
+            "goo.gl",
+            "snurl.com",
+            "esy.es",
+            "ow.ly",
+            "tr.im",
+            "is.gd",
+            "bit.do",
+            "us.to",
+            "chilp.it",
+            "t.co",
+            "tinyurl.com",
+            "reurl.cc"
+        ]
+    },
+    {
+        "key": "trustedHost",
+        "data": [
+            "discord.com",
+            "discord.gg",
+            "store.steampowered.com",
+            "google.com",
+            "support.discord.com",
+            "github.com"
+        ]
+    },
+    {
+        "key": "dangerWord",
+        "data": [
+            "discord",
+            "free",
+            "nitro",
+            "discordnitro",
+            "nitrodiscord",
+            "freenitro",
+            "nitrofree",
+            "steam",
+            "community",
+            "steamcommunity",
+            "communitysteam"
+        ]
+    }
+]
