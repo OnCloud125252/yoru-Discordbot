@@ -50,7 +50,7 @@ export default {
                     fields: [
                         {
                             name: `**Login Platform :**`,
-                            value: `\`${info.dev.platform}\``,
+                            value: `\`${info.release.platform}\``,
                             inline: false
                         },
                         {
@@ -85,7 +85,7 @@ export default {
                         }
                     ],
                     footer: {
-                        text: `V ${info.dev.version}`
+                        text: `V ${info.release.version}`
                     }
                 }]
             }).then(_ => resultMessage.delete());
