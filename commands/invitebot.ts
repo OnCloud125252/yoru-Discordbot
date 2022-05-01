@@ -1,10 +1,10 @@
 import { ICommand } from 'wokcommands';
+import info from '../resources/info';
 
 
 export default {
     category: 'invite',
     description: 'show invite link of bot',
-    testOnly: true,
 
     callback: ({ message }) => {
         message.reply({
@@ -17,6 +17,10 @@ export default {
                         value: `[ฅ ^• ω •^ ฅ](https://discord.com/api/oauth2/authorize?client_id=910897168615895050&scope=bot&permissions=8)`
                     },
                 ],
+                footer: {
+                    text: `Bot \`V ${info.release.botVersion}\``
+                },
+                timestamp: new Date(),
             }]
         });
     }

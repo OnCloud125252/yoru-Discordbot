@@ -16,6 +16,10 @@ export default (client: Client) => {
                                 value: `\`${info.release.prefix}\``
                             }
                         ],
+                        footer: {
+                            text: `Bot \`V ${info.release.botVersion}\``
+                        },
+                        timestamp: new Date(),
                     }
                 ]
             });

@@ -2,7 +2,7 @@ import Discord, { Intents } from 'discord.js';
 import Commands from 'wokcommands';
 import dotenv from 'dotenv';
 import { Filepath } from './resources/Filepath';
-import * as func from './resources/functions/.export.function';
+import * as func from './resources/functions/.export.functions';
 import info from './resources/info';
 
 
@@ -28,7 +28,7 @@ client.on('ready', async () => {
     console.log(`User name :        ${client.user?.tag}!`);
     console.log(`Login platform :   ${info.release.platform}`);
     console.log(`Time :             ${func.TWtime().full}`);
-    console.log(`Version :          V ${info.release.version}`);
+    console.log(`Version :          V ${info.release.botVersion}`);
     console.log();
     console.log();
     console.log("---------------------- Log ----------------------");
@@ -38,7 +38,7 @@ client.on('ready', async () => {
             status: "online",  // online, idle, dnd, invisible
         });
         client.user?.setActivity({
-            name: `[${info.release.prefix}] | ${client.ws.ping}ms`,
+            name: `[${info.release.prefix}] | ${client.ws.ping}ms | V${info.release.botVersion}`,
             type: "STREAMING", // PLAYING, WATCHING, LISTENING, STREAMING
             url: "https://youtu.be/4hbf3eybAPk"
         })

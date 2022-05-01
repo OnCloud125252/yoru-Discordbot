@@ -1,10 +1,12 @@
 import { ICommand } from 'wokcommands';
+import info from '../resources/info';
 
 
 export default {
     category: 'bot',
     description: 'test if the bot is alive',
-    testOnly: true,
+
+    // testOnly: true,
 
     callback: ({ message, client }) => {
         message.channel.send('Caculating ping . . .').then(resultMessage => {
@@ -18,14 +20,18 @@ export default {
                         {
                             name: `API latency :`,
                             value: `\`${apiLatency} ms\``,
-                            inline: false
+                            inline: true
                         },
                         {
                             name: `Network Latency :`,
                             value: `\`${networkLatency} ms\``,
-                            inline: false
+                            inline: true
                         }
-                    ]
+                    ],
+                    footer: {
+                        text: `Bot \`V ${info.release.botVersion}\``
+                    },
+                    timestamp: new Date(),
                 }]
             }).then(_ => resultMessage.delete());
         });

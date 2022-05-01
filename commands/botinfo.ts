@@ -1,7 +1,7 @@
 import { ICommand } from 'wokcommands';
-import * as func from '../resources/functions/.export.function';
+import * as func from '../resources/functions/.export.functions';
 import info from '../resources/info';
-import prettyMS from 'pretty-ms';
+
 
 export default {
     category: 'bot',
@@ -39,7 +39,7 @@ export default {
                     break;
                 default:
                     emoji = ":exploding_head:";
-                    emojitext = "Oh my, it looks terrible !\n***Kind reminder :***\n***Check if u are under the sea !***";
+                    emojitext = "Oh my, it looks terrible !\n***Are you on the moon ?***";
                     break;
             };
 
@@ -51,7 +51,7 @@ export default {
                         {
                             name: `**Login Platform :**`,
                             value: `\`${info.release.platform}\``,
-                            inline: false
+                            inline: true
                         },
                         {
                             name: `API Latency :`,
@@ -66,12 +66,12 @@ export default {
                         {
                             name: `Rate : ${emoji}`,
                             value: emojitext,
-                            inline: true
+                            inline: false
                         },
                         {
                             name: `Uptime :`,
-                            value: `\`${prettyMS(Number(client.uptime), { verbose: true })}\``,
-                            inline: true
+                            value: `\`${func.prettyMS(Number(client.uptime), { verbose: true })}\``,
+                            inline: false
                         },
                         {
                             name: `Start time :`,
@@ -79,14 +79,15 @@ export default {
                             inline: true
                         },
                         {
-                            name: `\u200b`,
-                            value: `\u200b`,
-                            inline: true
+                            name: `Version :`,
+                            value: `Bot \`V ${info.release.botVersion}\`\nScam detecter \`V ${info.release.scamdetecterVersion}\``,
+                            inline: false
                         }
                     ],
                     footer: {
-                        text: `V ${info.release.version}`
-                    }
+                        text: `Bot \`V ${info.release.botVersion}\``
+                    },
+                    timestamp: new Date(),
                 }]
             }).then(_ => resultMessage.delete());
         });

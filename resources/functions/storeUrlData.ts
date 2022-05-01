@@ -1,5 +1,5 @@
 import { Filepath } from '../Filepath';
-import { fs } from './.export.function';
+import { fs } from './.export.functions';
 
 
 ///Stores data in ./urlData.json

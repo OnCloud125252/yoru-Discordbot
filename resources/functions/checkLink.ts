@@ -1,5 +1,5 @@
 import { Filepath } from '../Filepath';
-import { fs, similar } from './.export.function';
+import { fs, similar } from './.export.functions';
 
 
 ///Check if the link is scam
@@ -29,26 +29,26 @@ export function checkLink(links: string[]) {
     function compare(url: string) {
         let d = new URL(url).hostname.replace(/^www./, '');
         let hostname = (d.indexOf(".") != -1 && !shortURL.includes(d) && !trustedHost.includes(d)) ? d.substring(d.indexOf("."), 0) : d;
+        let each = url.split("/").slice(2, url.length).join(".").split(".");
         let status = new String;
         let value = new Array;
-        let each = url.split("/").slice(2, url.length).join(".").split(".");
 
         dangerWord.forEach((ele: string, index: any) => {
             if (Number(similar(ele, hostname, 1)) >= 50.0) {
-                status = 'relatedDangerWord';
+                status = 'hostRelatedDangerWord';
                 value.push([similar(ele, hostname, 1), index, ele]);
             }
-            else if (each.some(ele_ => ele_ == ele)) {
-                status = 'containDangerWord';
-                value.push(["contain", index, ele]);
+            else if (each.some((ele_: string) => Number(similar(ele, ele_, 1)) >= 50.0)) {
+                status = 'relatedDangerWord';
+                each.forEach((ele_: string) => {
+                    if (Number(similar(ele, ele_, 1)) >= 50.0) {
+                        value.push([similar(ele, ele_, 1), index, ele]);
+                    };
+                });
             };
         });
 
-        if (dangerWord.includes(hostname)) {
-            value = new Array;
-
-        }
-        else if (shortURL.includes(hostname)) {
+        if (shortURL.includes(hostname)) {
             value = new Array;
             status = 'shortURL';
             value.push(['100', shortURL.indexOf(hostname), hostname]);
@@ -79,7 +79,7 @@ export function checkLink(links: string[]) {
         let result = compare(url);
         switch (result.status) {
             //Do not change the position!
-            case 'similarHost': //Warning
+            case 'similarHost': //Similar hostname
                 level.push(3);
                 reason.push(result.value);
                 break;
@@ -87,15 +87,15 @@ export function checkLink(links: string[]) {
                 level.push(2);
                 reason.push(result.value);
                 break;
-            case 'safeHost': //OK
+            case 'safeHost': //Safe
                 level.push(1);
                 reason.push(result.value);
                 break;
-            case 'relatedDangerWord': //Similar to Dangerous Word
+            case 'relatedDangerWord': //Similar to dangerous word
                 level.push(4);
                 reason.push(result.value);
                 break;
-            case 'containDangerWord': //Contain Dangerous Word
+            case 'hostRelatedDangerWord': //Host related to dangerous word
                 level.push(5);
                 reason.push(result.value);
                 break;

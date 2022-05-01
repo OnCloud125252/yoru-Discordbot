@@ -1,12 +1,19 @@
+import { fs } from './functions/.export.functions'; 1
+import { Filepath } from './Filepath';
+
+const version = JSON.parse(Object(fs.readFileSync(Filepath.packagejson))).version;
+
 export default {
     release: {
         platform: 'Heroku',
-        version: '1.0.0',
+        botVersion: version,
+        scamdetecterVersion: "1.0.0",
         prefix: "!"
     },
     dev: {
         platform: 'Terminal',
-        version: 'Beta 1.0.0',
+        botVersion: 'Beta 1.0.0',
+        scamdetecterVersion: "1.0.0",
         prefix: "$"
     }
 }

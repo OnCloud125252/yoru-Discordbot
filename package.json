@@ -18,5 +18,8 @@
     "dev": "pm2 start bot-dev.ts --watch"
   },
   "author": "Alex",
-  "license": "ISC"
+  "license": "ISC",
+  "_moduleAliases": {
+    "@functions": "./resources/functions/.export.function"
+  }
 }

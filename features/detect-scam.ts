@@ -1,5 +1,6 @@
 import { Client } from 'discord.js';
-import * as func from "../resources/functions/.export.function";
+import * as func from "../resources/functions/.export.functions";
+import info from "../resources/info";
 
 
 export default (client: Client) => {
@@ -10,10 +11,11 @@ export default (client: Client) => {
                 let result = func.checkLink(link);
                 let resultEmbed = {
                     color: 0x00ff00,
+                    description: "Always be aware of any link !",
                     fields: Array(),
                     timestamp: func.TWtime().full,
                     footer: {
-                        text: 'Always be aware of any link !'
+                        text: `Scam detecter \`V ${info.release.scamdetecterVersion}\`\nBot \`V ${info.release.botVersion}\``
                     },
                 };
         
@@ -41,32 +43,34 @@ export default (client: Client) => {
                     let reason = result.reason[index];
                     let position = index + 1;
                     switch (level) {
-                        case 1:
+                        case 1: //Safe
                             reason.forEach((ele: any) => {
                                 write(`Link number ${position} :`, `SAFE !`, `\`${ele[2]}\``);
                             });
                             break;
-                        case 2:
+                        case 2: //Short URL
                             reason.forEach((ele: any) => {
                                 write(`Link number ${position} :`, `CAUTION: is a short link !`, `\`${ele[2]}\``);
                                 resultEmbed.color = 0xffff00;
                             });
                             break;
-                        case 3:
+                        case 3: //Similar hostname
                             reason.forEach((ele: any) => {
-                                write(`Link number ${position} :`, `WARNING: might be scam !`, `\`${ele[0]}\` similar to \`${ele[2]}\``);
+                                write(`Link number ${position} :`, `WARNING: might be scam !`, `hostname is \`${ele[0]}\` similar to \`${ele[2]}\``);
                                 resultEmbed.color = 0xff0000;
                             });
                             break;
-                        case 4:
+                        case 4: //Similar to dangerous word
                             reason.forEach((ele: any) => {
-                                write(`Link number ${position} :`, `WARNING: might be scam !`, `\`${ele[0]}\` related to \`${ele[2]}\``);
-                                resultEmbed.color = 0xff0000;
+                                let description = Number(ele[0]) == 100 ? `contains \`${ele[2]}\`` : `\`${ele[0]}\` related to \`${ele[2]}\``;
+                                write(`Link number ${position} :`, `CAUTION: contain dangerous word !`, description);
+                                resultEmbed.color = 0xffff00;
                             });
                             break;
-                        case 5:
+                        case 5: //Host related to dangerous word
                             reason.forEach((ele: any) => {
-                                write(`Link number ${position} :`, `CAUTION: contain dangerous word !`, `\`${ele[2]}\``);
+                                let description = Number(ele[0]) == 100 ? `hostname contains \`${ele[2]}\`` : `hostname is \`${ele[0]}\` similar to \`${ele[2]}\``;
+                                write(`Link number ${position} :`, `CAUTION: hostname contain dangerous word !`, description);
                                 resultEmbed.color = 0xffff00;
                             });
                             break;
